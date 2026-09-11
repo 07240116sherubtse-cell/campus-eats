@@ -15,7 +15,7 @@
         <h3><%= r.name %></h3>
         <p><%= r.cuisine %></p>
         <span class="rating-pill">★ <%= r.rating %></span>
-        <a href="/menu" class="btn">View Menu</a>
+        <a href="/restaurants/<%= r.id %>/menu" class="btn">View Menu</a> 
       </div>
     <% }); %>
   </div>
