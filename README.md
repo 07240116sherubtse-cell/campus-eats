@@ -1,27 +1,27 @@
 campus-eats/ 
 ├── config/ 
-│   └── db.js                  (pg-promise connection, reused by every Model) 
+│   └── db.js 
 ├── controllers/ 
-│   ├── homeController.js      (Controller — reads restaurants from the DB) 
-│   ├── aboutController.js     (Controller) 
-│   ├── menuController.js      (Controller — reads one restaurant's menu from the DB) 
-│   └── orderController.js     (Controller — still in-memory, next lab) 
+│   ├── homeController.js      (Controller — restaurants + stats + popular items) 
+│   ├── aboutController.js 
+│   ├── menuController.js 
+│   └── orderController.js     (Controller — full CRUD: create, read, update, cancel) 
 ├── models/ 
-│   ├── Restaurant.js          (Model / entity class) 
-│   └── MenuItem.js            (Model / entity class) 
+│   ├── Restaurant.js 
+│   ├── MenuItem.js 
+│   └── Order.js               (Model / entity class — CRUD + aggregation queries + a transaction) 
 ├── routes/ 
-│   └── index.js               (Routing — /, /about, /restaurants/:id/menu, POST /orders) 
+│   └── index.js               (Routing — /, /about, /restaurants/:id/menu, POST /orders, 
+│                                GET /orders/:id, POST /orders/:id/update, POST /orders/:id/cancel) 
 ├── views/ 
 │   ├── partials/ 
-│   │   ├── header.ejs 
-│   │   └── footer.ejs 
-│   ├── index.ejs              (View — restaurants from the DB) 
+│   ├── index.ejs              (View — restaurants + stats bar + popular items) 
 │   ├── about.ejs 
-│   ├── menu.ejs               (View — one restaurant's real menu) 
-│   └── order_confirmation.ejs 
+│   ├── menu.ejs               (View — order form now sends itemId) 
+│   └── order_confirmation.ejs (View — real order, with update and cancel forms) 
 ├── public/ 
 ├── app.js 
-├── .env                       (now includes DB_HOST, DB_NAME, DB_USER, DB_PASS) 
+├── .env 
 ├── .gitignore 
 ├── nodemon.json 
-└── package.json
+└── package.json 
