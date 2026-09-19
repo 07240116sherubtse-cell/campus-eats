@@ -1,5 +1,24 @@
 <%- include('partials/header') %>
 
+<section class="stats-bar"> 
+  <p><strong><%= stats.total_orders %></strong> orders placed · Nu. <strong><%= 
+stats.total_revenue %></strong> in sales</p> 
+</section> 
+ 
+<% if (popularItems.length > 0) { %> 
+  <section class="popular"> 
+    <h2>Popular Right Now</h2> 
+    <div class="popular-grid"> 
+      <% popularItems.forEach(item => { %> 
+        <div class="popular-item"> 
+          <h3><%= item.name %></h3> 
+          <span class="rating-pill"><%= item.times_ordered %> ordered</span> 
+        </div> 
+      <% }); %> 
+    </div> 
+  </section> 
+<% } %>
+
 <section class="hero">
   <span class="eyebrow">Multi-restaurant ordering</span>
   <h1>Welcome to Campus Eats</h1>
