@@ -14,6 +14,21 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+const session = require('express-session');
+
+app.use(session({
+  secret: process.env.SESSION_SECRET || 'campus-eats-dev-secret',
+  resave: false,
+  saveUninitialized: false,
+}));
+
+// Make the logged-in user available to every view, without passing it manually every time
+app.use((req, res, next) => {
+  res.locals.user = req.session.user || null;
+  next();
+});
+
 // Routes
 const indexRoutes = require('./routes/index');
 app.use('/', indexRoutes);
