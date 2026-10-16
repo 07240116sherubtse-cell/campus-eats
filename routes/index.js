@@ -8,6 +8,7 @@ const menuController = require('../controllers/menuController');
 const authController = require('../controllers/authController');
 const adminController = require('../controllers/adminController');
 const superAdminController = require('../controllers/superAdminController');
+const feedbackController = require('../controllers/feedbackController');
 
 const {
   requireAuth,
@@ -69,5 +70,6 @@ router.get('/forgot-password', authController.showForgotPassword);
 router.post('/forgot-password', authController.forgotPassword);
 router.get('/reset-password/:token', authController.showResetPassword);
 router.post('/reset-password/:token', authController.resetPassword);
+router.post('/restaurants/:id/feedback', feedbackController.submitFeedback);
 
 module.exports = router;

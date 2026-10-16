@@ -28,7 +28,12 @@ exports.deactivateRestaurant = (id) => {
 
 exports.getRestaurantByOwnerId = (ownerId) => {
   return db.oneOrNone(
-    'SELECT * FROM restaurants WHERE owner_id = $1 LIMIT 1',
+    `SELECT * FROM restaurants
+     WHERE owner_id = $1
+       AND is_active = true
+     ORDER BY id
+     LIMIT 1`,
     [ownerId]
   );
 };
+

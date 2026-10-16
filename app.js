@@ -3,6 +3,12 @@ const path = require('path');
 const dotenv = require('dotenv');
 dotenv.config();
 
+// MongoDB connection
+const { connectMongo } = require('./config/mongo');
+connectMongo().catch(err =>
+console.error('MongoDB connection failed:', err)
+);
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -18,15 +24,15 @@ app.use(express.json());
 const session = require('express-session');
 
 app.use(session({
-  secret: process.env.SESSION_SECRET || 'campus-eats-dev-secret',
-  resave: false,
-  saveUninitialized: false,
+secret: process.env.SESSION_SECRET || 'campus-eats-dev-secret',
+resave: false,
+saveUninitialized: false,
 }));
 
-// Make the logged-in user available to every view, without passing it manually every time
+// Make the logged-in user available to every view
 app.use((req, res, next) => {
-  res.locals.user = req.session.user || null;
-  next();
+res.locals.user = req.session.user || null;
+next();
 });
 
 // Routes
@@ -37,5 +43,5 @@ const apiRoutes = require('./routes/api');
 app.use('/api', apiRoutes);
 
 app.listen(PORT, () => {
-  console.log(`Campus Eats running at http://localhost:${PORT}`);
+console.log(`Campus Eats running at http://localhost:${PORT}`);
 });
